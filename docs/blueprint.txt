@@ -1,0 +1,90 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                         🏗  SAENBARREL BLUEPRINT                             ║
+║                    Single Gateway Architecture v1.0                          ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────┐     SSH      ┌──────────────────────────────────┐
+│         💻 MATEBOOK              │────────────▶│      🍓 RASPBERRY PI 4           │
+│         (Windows)               │  hermes-pi   │      192.168.1.109              │
+│                                 │              │      center-node                 │
+│  ┌───────────────────────────┐  │              │                                  │
+│  │ Hermes CLI v0.16.0        │  │              │  ┌────────────────────────────┐  │
+│  │ (local, ไม่ใช้)            │  │              │  │  Hermes Gateway v0.16.0    │  │
+│  └───────────────────────────┘  │              │  │  ● active (running)        │  │
+│                                 │              │  │  ● Telegram bot            │  │
+│  ┌───────────────────────────┐  │              │  │  ● state.db (sessions)     │  │
+│  │ Obsidian Vault            │  │              │  │  ● memories/               │  │
+│  │ D:/SaenBarrel/            │  │   git pull   │  └─────────────┬──────────────┘  │
+│  │ ● 00_Raw/ (notes)         │◀─┼──────────────┤                │                 │
+│  │ ● 01_Wiki/ (knowledge)    │  │              │  ┌─────────────▼──────────────┐  │
+│  │ ● Templates/              │  │              │  │  SaenBarrel/               │  │
+│  │ ● Utility/Scripts/        │  │              │  │  /home/admin/SaenBarrel/   │  │
+│  └───────────┬───────────────┘  │              │  │  ● Obsidian vault (copy)   │  │
+│              │                  │              │  │  ● config/ (master)        │  │
+│              │ git push         │              │  │  ● docs/ (blueprint)       │  │
+│              ▼                  │              │  └─────────────┬──────────────┘  │
+│  ┌───────────────────────────┐  │              │                │                 │
+│  │ ☁ GITHUB                  │  │              │  ┌─────────────▼──────────────┐  │
+│  │ nithep/SaenBarrel         │  │              │  │  config.yaml ← symlink     │  │
+│  │ (public, master)          │  │              │  │  → SaenBarrel/config/      │  │
+│  │                           │  │              │  └────────────────────────────┘  │
+│  │ Pull Request / Push       │  │              │                                  │
+│  │ SSH: saenbarrel_rsa       │  │              └──────────────┬───────────────────┘
+│  └───────────────────────────┘  │                           │
+└─────────────────────────────────┘                           │
+                                                              │ Telegram
+                                                              ▼
+                                                   ┌──────────────────────┐
+                                                   │  📱 TELEGRAM BOT     │
+                                                   │  Saen Bot            │
+                                                   │                      │
+                                                   │  → Pi gateway        │
+                                                   │  → state.db          │
+                                                   │  → memories          │
+                                                   └──────────────────────┘
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                           📋  SYNC MATRIX                                  ║
+╠═══════════════════╦════════════╦═════════════╦══════════════╦═══════════════╣
+║  สิ่งที่ sync       ║  ทิศทาง    ║  วิธี        ║  Frequency   ║  สถานะ        ║
+╠═══════════════════╬════════════╬═════════════╬══════════════╬═══════════════╣
+║  Obsidian vault   ║  Win ↔ Pi  ║  git push/  ║  Manual      ║  ✅ Active    ║
+║  (notes, wiki)    ║            ║  pull       ║              ║               ║
+╠═══════════════════╬════════════╬═════════════╬══════════════╬═══════════════╣
+║  Hermes config    ║  Win → Pi  ║  symlink    ║  On change   ║  ✅ Active    ║
+║  (config.yaml)    ║            ║  ← repo     ║              ║               ║
+╠═══════════════════╬════════════╬═════════════╬══════════════╬═══════════════╣
+║  Hermes sessions  ║  Pi only   ║  state.db   ║  Real-time   ║  ✅ Active    ║
+║  /memory          ║            ║  (local)    ║              ║               ║
+╠═══════════════════╬════════════╬═════════════╬══════════════╬═══════════════╣
+║  Telegram bot     ║  Pi only   ║  gateway    ║  Real-time   ║  ✅ Active    ║
+╠═══════════════════╬════════════╬═════════════╬══════════════╬═══════════════╣
+║  Hermes CLI       ║  Win → Pi  ║  SSH        ║  On use      ║  ✅ Active    ║
+║  (hermes-pi)      ║            │  wrapper    ║              ║               ║
+╚═══════════════════╩════════════╩═════════════╩══════════════╩═══════════════╝
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                        🔑  KEY FILES                                       ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                      S     ║
+║  Windows SSH key:  ~/.ssh/saenbarrel_rsa                                  ║
+║  Pi SSH key:       ~/.ssh/ (SaenBarrel, on GitHub)                        ║
+║  Git identity:     nithep / nithep@example.com                             ║
+║  Repo:             git@github.com:nithep/SaenBarrel.git                    ║
+║                                                                      E     ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                      C     ║
+║  Pi gateway:       systemctl --user status hermes-gateway                 ║
+║  Hermes version:   v0.16.0 (2026.6.5) — both machines                    ║
+║  Matebook Hermes:  hermes-pi (wrapper → SSH → Pi)                         ║
+║                                                                      R     ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                      E     ║
+║  sync-hermes.sh         — sync state.db between devices                   ║
+║  sync-hermes-config.sh  — sync Hermes config to Pi                        ║
+║  architecture.html      — visual diagram (open in browser)                ║
+║  blueprint.txt          — this file                                       ║
+║                                                                      T     ║
+╚══════════════════════════════════════════════════════════════════════════════╝

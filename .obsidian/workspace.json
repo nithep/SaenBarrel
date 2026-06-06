@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "hermes-agent/GITHUB_AUTH_SETUP.md",
+                "file": "docs/hermes-pi4-install-guide.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "GITHUB_AUTH_SETUP"
+              "title": "hermes-pi4-install-guide"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 364.5060043334961
+    "width": 271.5060043334961
   },
   "right": {
     "id": "944fff7ac3c850e2",
@@ -187,6 +187,11 @@
   },
   "active": "7b785bd6d7bef42c",
   "lastOpenFiles": [
+    "01_Wiki/Concepts/SaenLangDemo.md",
+    "01_Wiki/Concepts/Obsidian Templates.md",
+    "01_Wiki/MOCs/Master Index.md",
+    "hermes-agent/GITHUB_AUTH_SETUP.md",
+    "docs/hermes-pi4-install-guide.md",
     "docs/blueprint.txt",
     "docs/architecture.html",
     "docs",
@@ -197,7 +202,6 @@
     "hermes-agent/build/bdist.win-amd64/wheel/hermes_agent-0.16.0.dist-info/WHEEL",
     "hermes-agent/build/bdist.win-amd64/wheel/hermes_agent-0.16.0.dist-info/licenses/LICENSE",
     "hermes-agent/build/bdist.win-amd64/wheel/hermes_agent-0.16.0.dist-info/licenses",
-    "hermes-agent/build/bdist.win-amd64/wheel/hermes_agent-0.16.0.dist-info/METADATA",
     "hermes-agent/build/bdist.win-amd64/wheel/plugins/observability/nemo_relay/README.md",
     "hermes-agent/build/bdist.win-amd64/wheel/plugins/observability/langfuse/README.md",
     "hermes-agent/build/bdist.win-amd64/wheel/plugins/model-providers/README.md",
@@ -221,10 +225,6 @@
     "hermes-agent/build/lib/plugins/memory/mem0/README.md",
     "hermes-agent/build/lib/plugins/memory/honcho/README.md",
     "hermes-agent/build/lib/plugins/memory/holographic/README.md",
-    "hermes-agent/build/lib/plugins/memory/hindsight/README.md",
-    "hermes-agent/build/lib/plugins/memory/byterover/README.md",
-    "hermes-agent/build/lib/plugins/security-guidance/README.md",
-    "hermes-agent/build/lib/plugins/model-providers/README.md",
     "hermes-agent/gateway/assets/telegram-botfather-threads-settings.jpg"
   ]
 }

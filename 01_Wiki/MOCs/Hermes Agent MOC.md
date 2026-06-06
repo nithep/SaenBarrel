@@ -1,31 +1,30 @@
 ---
 title: "Hermes Agent MOC"
 created: 2026-06-06
-updated: 2026-06-06
+updated: 2026-06-07
 type: moc
-status: active
-tags: [moc, hermes, llm-wiki]
-source: "Vault Manager"
+status: published
+tags: [moc, hermes, agent]
+related: [[Master Index]], [[LLM Wiki MOC]]
 ---
 
-# Hermes Agent MOC
+# 🤖 Hermes Agent MOC
 
-## จุดเริ่มต้น
-- [[Hermes Agent]]
-- [[การตั้งค่า Hermes Agent]]
-- [[LLM Wiki Workflow]]
+> Map of Content — ทุกอย่างเกี่ยวกับ Hermes Agent
 
-## Raw ที่เกี่ยวข้อง
-- [[บันทึกการตั้งค่า Hermes Agent]]
-- [[สรุปวิธีการเป็นเจ้าหน้าที่ตัวแทน Hermes]]
+## บทความหลัก
+- [[Hermes Agent]] — ภาพรวมระบบ
+- [[SaenBarrel Architecture]] — สถาปัตยกรรมระบบ
+- [[Hermes Pi4 Installation Guide]] — คู่มือติดตั้ง
 
-## คำถามนำทาง
-- ตอนนี้ควรอยู่ที่ Hermes Level 1, 2, 3 หรือ 4?
-- งานใดควรทำโดยตัวแทนเดียว และงานใดควรแยกเป็น agent เฉพาะทาง?
-- ข้อมูลใดควรอยู่ใน Control Room และข้อมูลใดควรอยู่ใน Obsidian vault?
-- บันทึกใดใน `00_Raw` พร้อมคอมไพล์เป็นบทความวิกิถัดไป?
+## การตั้งค่า
+- [[Hermes Config]] — การตั้งค่า config.yaml
+- [[Hermes Plugins]] — ปลั๊กอินและเครื่องมือ
 
-## งานต่อไป
-- เติมบทความเรื่อง Control Room
-- เติมบทความเรื่อง Agent Roles
-- ตั้งรอบตรวจ `00_Raw` และอัปเดต MOC
+## การใช้งาน
+- [[Hermes CLI]] — คำสั่งพื้นฐาน
+- [[Hermes Gateway]] — การจัดการ gateway
+- [[Hermes Skills]] — สกิลต่างๆ
+
+## การแก้ปัญหา
+- [[Hermes Troubleshooting]] — วิธีแก้ปัญหาที่พบบ่อย

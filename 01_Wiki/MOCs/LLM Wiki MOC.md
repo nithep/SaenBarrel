@@ -1,26 +1,27 @@
 ---
 title: "LLM Wiki MOC"
 created: 2026-06-06
-updated: 2026-06-06
+updated: 2026-06-07
 type: moc
-status: active
-tags: [moc, llm-wiki, obsidian]
-source: "Vault Manager"
+status: published
+tags: [moc, llm-wiki, knowledge-base]
+related: [[Master Index]], [[Hermes Agent MOC]]
 ---
 
-# LLM Wiki MOC
+# 📚 LLM Wiki MOC
 
-## Workflow
-- [[LLM Wiki Workflow]]
-- [[Hermes Agent MOC]]
+> Map of Content — ทุกอย่างเกี่ยวกับ LLM Wiki
 
-## แนวทางและบทบาท
-- [[Vault Manager]]
-- [[แนวทางปฏิบัติ LLM Wiki]]
+## แนวคิดหลัก
+- [[LLM Wiki]] — ระบบสังเคราะห์ความรู้อัตโนมัติ
+- [[Kipano]] — ระบบจดบันทึกของ CEO Obsidian
+- [[แนวทางปฏิบัติ LLM Wiki]] — คู่มือปฏิบัติ
 
-## พื้นที่ทำงาน
-- `00_Raw/` สำหรับข้อมูลดิบ
-- `01_Wiki/Concepts/` สำหรับบทความแนวคิด
-- `01_Wiki/MOCs/` สำหรับแผนที่เนื้อหา
-- `Utility/Templates/` สำหรับเทมเพลต
-- `Utility/Scripts/` สำหรับสคริปต์ช่วยงาน
+## การคอมไพล์
+- [[Vault Manager]] — ผู้คุมระบบคอมไพล์
+- [[Obsidian Templates]] — เทมเพลตสำหรับ vault
+- [[SaenLangDemo]] — รายงานตรวจสอบ LangChain Demo
+
+## เครื่องมือ
+- [[Obsidian Plugins]] — Dataview, Templater, GitHub Sync
+- [[Hermes Agent]] — AI Agent สำหรับคอมไพล์

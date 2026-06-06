@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SaenBarrel Architecture</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1117; color: #c9d1d9; font-family: 'Segoe UI', sans-serif; padding: 20px; }
+  h1 { color: #58a6ff; text-align: center; margin-bottom: 30px; font-size: 24px; }
+  h2 { color: #79c0ff; margin: 20px 0 10px; font-size: 16px; }
+  .diagram { display: flex; flex-direction: column; gap: 20px; max-width: 900px; margin: 0 auto; }
+  .row { display: flex; gap: 20px; align-items: stretch; }
+  .box { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 16px; flex: 1; }
+  .box h3 { color: #58a6ff; font-size: 14px; margin-bottom: 8px; }
+  .box .subtitle { color: #8b949e; font-size: 11px; margin-bottom: 12px; }
+  .box ul { list-style: none; padding: 0; }
+  .box li { padding: 4px 0; font-size: 12px; color: #c9d1d9; }
+  .box li::before { content: "• "; color: #3fb950; }
+  .box .sync::before { content: "↕ "; color: #d29922; }
+  .box .ssh::before { content: "🔑 "; }
+  .box .git::before { content: "⎇ "; color: #f78166; }
+  .arrow { text-align: center; font-size: 20px; color: #30363d; padding: 5px; }
+  .arrow.sync { color: #d29922; }
+  .arrow.ssh { color: #58a6ff; }
+  .arrow.git { color: #f78166; }
+  .label { font-size: 10px; color: #8b949e; text-align: center; margin-top: -15px; margin-bottom: 5px; }
+  .status { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .status.ok { background: #3fb950; }
+  .status.warn { background: #d29922; }
+  .legend { display: flex; gap: 20px; justify-content: center; margin-top: 20px; font-size: 11px; color: #8b949e; }
+  .legend span::before { content: "● "; }
+  .legend .l-sync::before { color: #d29922; }
+  .legend .l-ssh::before { color: #58a6ff; }
+  .legend .l-git::before { color: #f78166; }
+  .legend .l-local::before { color: #3fb950; }
+</style>
+</head>
+<body>
+<h1>🏗 SaenBarrel Architecture</h1>
+<div class="diagram">
+
+  <!-- Row 1: Matebook -->
+  <div class="row">
+    <div class="box" style="flex:2;">
+      <h3><span class="status ok"></span>💻 Matebook (Windows)</h3>
+      <div class="subtitle">Client — SSH ไป Pi เสมอ</div>
+      <ul>
+        <li class="ssh">hermes-pi wrapper → SSH → Pi gateway</li>
+        <li class="git">SaenBarrel repo (D:/SaenBarrel/) — working copy</li>
+        <li>Obsidian vault — แก้ไขที่นี่</li>
+        <li>Hermes CLI v0.16.0 (local, ไม่ใช้งาน)</li>
+      </ul>
+    </div>
+    <div class="box" style="flex:1;">
+      <h3><span class="status ok"></span>☁ GitHub</h3>
+      <div class="subtitle">Sync Hub — nithep/SaenBarrel</div>
+      <ul>
+        <li class="git">git push/pull (SSH: saenbarrel_rsa)</li>
+        <li>Obsidian vault + notes</li>
+        <li>Hermes config (master)</li>
+        <li>Utility scripts</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Arrow: Matebook ↔ GitHub -->
+  <div class="arrow git">⇅ git push/pull (SSH)</div>
+
+  <!-- Row 2: Pi -->
+  <div class="row">
+    <div class="box" style="flex:2;">
+      <h3><span class="status ok"></span>🍓 Raspberry Pi 4 (center-node)</h3>
+      <div class="subtitle">192.168.1.109 — Gateway หลัก (Single Source of Truth)</div>
+      <ul>
+        <li><strong>Hermes Gateway</strong> v0.16.0 — active (running)</li>
+        <li>state.db — sessions, memory (7.3MB)</li>
+        <li>config.yaml ← symlink ← SaenBarrel/config/</li>
+        <li>Telegram bot → Hermes gateway</li>
+        <li>SaenBarrel clone → /home/admin/SaenBarrel/</li>
+        <li>Obsidian vault copy (read-only)</li>
+      </ul>
+    </div>
+    <div class="box" style="flex:1;">
+      <h3><span class="status ok"></span>📱 Telegram</h3>
+      <div class="subtitle">Saen Bot — ผ่าน Pi gateway</div>
+      <ul>
+        <li>→ Pi Hermes gateway</li>
+        <li>Session อยู่บน Pi state.db</li>
+        <li>Memory อยู่บน Pi memories/</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Arrow: Matebook ↔ Pi -->
+  <div class="arrow ssh">↓ SSH tunnel (hermes-pi) ↓</div>
+
+  <!-- Sync Table -->
+  <div class="box">
+    <h3>↕ Sync Matrix</h3>
+    <div class="subtitle">สิ่งที่ sync ระหว่าง Matebook ↔ Pi</div>
+    <table style="width:100%; font-size:12px; border-collapse:collapse; margin-top:8px;">
+      <tr style="border-bottom:1px solid #30363d;">
+        <th style="text-align:left; padding:6px; color:#79c0ff;">สิ่งที่ sync</th>
+        <th style="text-align:center; padding:6px; color:#79c0ff;">ทิศทาง</th>
+        <th style="text-align:center; padding:6px; color:#79c0ff;">วิธี</th>
+        <th style="text-align:center; padding:6px; color:#79c0px;">สถานะ</th>
+      </tr>
+      <tr style="border-bottom:1px solid #21262d;">
+        <td style="padding:6px;">Obsidian vault (notes, wiki)</td>
+        <td style="text-align:center; padding:6px;">Win → Pi</td>
+        <td style="text-align:center; padding:6px;">git push/pull</td>
+        <td style="text-align:center; padding:6px;"><span class="status ok"></span></td>
+      </tr>
+      <tr style="border-bottom:1px solid #21262d;">
+        <td style="padding:6px;">Hermes config (config.yaml)</td>
+        <td style="text-align:center; padding:6px;">Win → Pi</td>
+        <td style="text-align:center; padding:6px;">symlink ← repo</td>
+        <td style="text-align:center; padding:6px;"><span class="status ok"></span></td>
+      </tr>
+      <tr style="border-bottom:1px solid #21262d;">
+        <td style="padding:6px;">Hermes sessions/memory</td>
+        <td style="text-align:center; padding:6px;">Pi only</td>
+        <td style="text-align:center; padding:6px;">state.db (local)</td>
+        <td style="text-align:center; padding:6px;"><span class="status ok"></span></td>
+      </tr>
+      <tr style="border-bottom:1px solid #21262d;">
+        <td style="padding:6px;">Hermes CLI usage</td>
+        <td style="text-align:center; padding:6px;">Win → Pi</td>
+        <td style="text-align:center; padding:6px;">SSH (hermes-pi)</td>
+        <td style="text-align:center; padding:6px;"><span class="status ok"></span></td>
+      </tr>
+      <tr>
+        <td style="padding:6px;">Telegram bot</td>
+        <td style="text-align:center; padding:6px;">Pi only</td>
+        <td style="text-align:center; padding:6px;">gateway</td>
+        <td style="text-align:center; padding:6px;"><span class="status ok"></span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <span class="l-ssh">SSH</span>
+    <span class="l-git">Git</span>
+    <span class="l-sync">Sync</span>
+    <span class="l-local">Local</span>
+  </div>
+
+</div>
+</body>
+</html>

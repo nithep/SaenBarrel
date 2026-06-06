@@ -1,0 +1,9 @@
+{
+  "remoteURL": "https://github.com/nithep/SaenBarrel.git",
+  "gitLocation": "C:\\Program Files\\Git\\bin\\git.exe",
+  "syncinterval": 0,
+  "isSyncOnLoad": true,
+  "checkStatusOnLoad": true,
+  "noticeLevel": "ALL",
+  "showSyncSuccessNotice": false
+}

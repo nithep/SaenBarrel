@@ -1,0 +1,31 @@
+# === OS / Editor ===
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# === Obsidian workspace cache ===
+.obsidian/workspace.json
+.obsidian/graph.json
+
+# === Hermes Agent (upstream — don't push) ===
+hermes-agent/
+
+# === Large binary files ===
+*.mp4
+*.mp3
+*.wav
+*.zip
+*.tar.gz
+
+# === Node / Python ===
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+
+# === Secrets ===
+.env
+.env.*
+!.env.example

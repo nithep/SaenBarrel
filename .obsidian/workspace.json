@@ -185,13 +185,13 @@
       "github-sync:Sync with Remote": false
     }
   },
-  "active": "7b785bd6d7bef42c",
+  "active": "2f6ab7404bd2691e",
   "lastOpenFiles": [
+    "01_Wiki/MOCs/Master Index.md",
+    "docs/hermes-pi4-install-guide.md",
     "01_Wiki/Concepts/SaenLangDemo.md",
     "01_Wiki/Concepts/Obsidian Templates.md",
-    "01_Wiki/MOCs/Master Index.md",
     "hermes-agent/GITHUB_AUTH_SETUP.md",
-    "docs/hermes-pi4-install-guide.md",
     "docs/blueprint.txt",
     "docs/architecture.html",
     "docs",
